@@ -4,7 +4,7 @@ import { createUserApi } from "../util/api";
 import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
-  const navgate = useNavigate();
+  const navigate = useNavigate();
   const onFinish = async (values) => {
     const { name, email, password } = values;
 
@@ -17,7 +17,7 @@ const RegisterPage = () => {
         // Success
         description: "Hoàn Thành",
       });
-      navgate("/login");
+      navigate("/login");
     } else {
       notification.error({
         message: "CREATE USER",
