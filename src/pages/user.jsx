@@ -1,15 +1,21 @@
-import { Table } from "antd";
+import { notification, Table } from "antd";
 import { useEffect, useState } from "react";
 import { getUserApi } from "../util/api";
 
 const UserPage = () => {
   const [dataSource, setDataSource] = useState([]);
 
+  //Gọi API
   useEffect(() => {
     const fetchUser = async () => {
       const res = await getUserApi();
-      if (res) {
+      if (!res?.message) {
         setDataSource(res);
+      } else {
+        notification.error({
+          message: "Unauthorized",
+          description: res.message, //tìm hiểu cách đá người dùng về trang login
+        });
       }
     };
     fetchUser();

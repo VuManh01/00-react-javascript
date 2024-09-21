@@ -5,9 +5,10 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import { Menu } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
   const items = [
     {
       label: <Link to={"/"}>Home Page</Link>,
@@ -25,11 +26,21 @@ const Header = () => {
       icon: <SettingOutlined />,
       children: [
         {
-          label: "Đăng Nhập",
+          label: <Link to={"/login"}>Đăng Nhập</Link>,
           key: "login",
         },
         {
-          label: "Đăng xuất",
+          label: (
+            <span
+              onClick={() => {
+                localStorage.clear("access_token");
+                setCurrent("home");
+                navigate("/");
+              }}
+            >
+              Đăng xuất
+            </span>
+          ),
           key: "logout",
         },
       ],
